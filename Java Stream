@@ -1,0 +1,82 @@
+	//Creating an array of maximum values amongst rows of 2 dimensional array
+  
+  int[][] source = new int[][]{
+	        new int[]{1, 2, 3, 4},
+	        new int[]{-3, -7, -5, -5},
+	        new int[]{11, 3, 7, 9},
+	        new int[]{121, -41, 515, -466}
+	};
+	
+	int[] rowMax = Arrays.stream(source)
+                .mapToInt(ints -> Arrays.stream(ints).max().getAsInt())
+                .toArray();
+	System.out.println(Arrays.toString(rowMax));// should be [4, -3, 11, 515]
+  
+  // Finding the sum of max value per row in multidimensional array
+  
+  	int jobsData[][][][] = {
+		{ 
+		    { 
+			{ 3, 0 }, //alternative0 (processing time, machineId)
+			{ 1, 1 }, //alternative1 (processing time, machineId)
+			{ 5, 2 }  //alternative2 (processing time, machineId)
+		    },//task0 
+		    { 
+			{ 2, 0 }, 
+			{ 4, 1 }, 
+			{ 6, 2 } 
+		    },//task1
+		    { 
+			{ 2, 0 }, 
+        			{ 3, 1 }, 
+        			{ 1, 2 }
+        		    } //task2
+		}, // job0
+		{ 
+		    { 
+			{ 2, 0 }, 
+			{ 3, 1 }, 
+			{ 4, 2 } 
+		    }, 
+		    { 
+			{ 1, 0 }, 
+			{ 5, 1 }, 
+			{ 4, 2 } 
+		    },
+		    { 
+			{ 2, 0 }, 
+			{ 1, 1 }, 
+			{ 4, 2 } 
+		    } 
+		},//job1
+		{ 
+		    { 
+			{ 2, 0 }, 
+			{ 1, 1 }, 
+			{ 4, 2 } 
+		    }, 
+		    { 
+			{ 2, 0 }, 
+			{ 3, 1 }, 
+			{ 4, 2 } 
+		    },
+		    { 
+			{ 3, 0 }, 
+			{ 1, 1 }, 
+			{ 5, 2 } 
+		    } 
+		} // job2
+	};
+
+  	int horizon = Arrays.stream(jobsData)
+	.flatMap(jobs -> Arrays.stream(jobs))
+	.map(task -> Arrays.stream(task)
+		.mapToInt(alternative -> Stream.of(alternative[0])
+			.max(Integer::compare)
+			.get())
+		.map(a->a)
+		.max()
+		.getAsInt())
+	.mapToInt(Integer::valueOf).sum();
+	
+	System.out.println("horizon = "+horizon);//should be 40;
