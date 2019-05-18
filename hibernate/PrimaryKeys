@@ -1,0 +1,5 @@
+Using @GeneratedValue() without specifying the sequence to use will make Hibernate to use its default sequence name: hibernate_sequence.
+
+We can supply a sequence name as part of the GeneratedValue annotation. eg.
+
+@GeneratedValue(strategy=SEQUENCE, generator="XXX_id_seq")
