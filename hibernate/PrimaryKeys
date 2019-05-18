@@ -3,3 +3,6 @@ Using @GeneratedValue() without specifying the sequence to use will make Hiberna
 We can supply a sequence name as part of the GeneratedValue annotation. eg.
 
 @GeneratedValue(strategy=SEQUENCE, generator="XXX_id_seq")
+
+If we don't have hibernate_sequence in our schema we could create it:
+create sequence <schema>.hibernate_sequence
