@@ -1,0 +1,8 @@
+which Java version you’re currently using:
+/usr/libexec/java_home
+
+If you have multiple version installed:
+/usr/libexec/java_home -V
+
+switch versions:
+export JAVA_HOME=`/usr/libexec/java_home -V 11.0.3`
